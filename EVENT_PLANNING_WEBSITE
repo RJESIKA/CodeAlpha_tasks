@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Planning Website</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background-color: #f0f0f0;
+        }
+        header {
+            background-color: #4CAF50;
+            color: white;
+            text-align: center;
+            padding: 1em;
+        }
+        .container {
+            padding: 2em;
+        }
+        .event-form {
+            background-color: white;
+            padding: 2em;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .event-form label {
+            display: block;
+            margin-bottom: 0.5em;
+        }
+        .event-form input, .event-form textarea {
+            width: 100%;
+            padding: 0.5em;
+            margin-bottom: 1em;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .event-form button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 0.7em 1.5em;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .events-list {
+            margin-top: 2em;
+        }
+        .event-item {
+            background-color: white;
+            padding: 1em;
+            margin-bottom: 1em;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Event Planning Website</h1>
+    </header>
+    <div class="container">
+        <div class="event-form">
+            <h2>Plan Your Event</h2>
+            <form id="eventForm">
+                <label for="eventName">Event Name</label>
+                <input type="text" id="eventName" required>
+                
+                <label for="eventDate">Event Date</label>
+                <input type="date" id="eventDate" required>
+                
+                <label for="eventDescription">Event Description</label>
+                <textarea id="eventDescription" rows="4" required></textarea>
+                
+                <button type="submit">Add Event</button>
+            </form>
+        </div>
+        <div class="events-list" id="eventsList">
+            <h2>Upcoming Events</h2>
+        </div>
+    </div>
+    <script>
+        document.getElementById('eventForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form values
+            const eventName = document.getElementById('eventName').value;
+            const eventDate = document.getElementById('eventDate').value;
+            const eventDescription = document.getElementById('eventDescription').value;
+            
+            // Create new event item
+            const eventItem = document.createElement('div');
+            eventItem.classList.add('event-item');
+            
+            const eventDetails = `
+                <h3>${eventName}</h3>
+                <p><strong>Date:</strong> ${eventDate}</p>
+                <p>${eventDescription}</p>
+            `;
+            
+            eventItem.innerHTML = eventDetails;
+            
+            // Add event item to events list
+            document.getElementById('eventsList').appendChild(eventItem);
+            
+            // Clear form
+            document.getElementById('eventForm').reset();
+        });
+    </script>
+</body>
+</html>
